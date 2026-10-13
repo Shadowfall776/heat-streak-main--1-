@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://7odjdwygqx2a"]
+
+[ext_resource type="Script" uid="uid://du41ippeq1bha" path="res://Player/Vehicles/heli.gd" id="1_7juqt"]
+[ext_resource type="Texture2D" uid="uid://b14v6ouux7xu7" path="res://Assets/2BUEWD-TopView (2).png" id="2_7juqt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af25e"]
+size = Vector2(70, 80)
+
+[node name="Player" type="CharacterBody2D" unique_id=1601155827 groups=["Player"]]
+z_index = 10
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_7juqt")
+SPEED = 800.0
+isRobot = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=804397636]
+shape = SubResource("RectangleShape2D_af25e")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=8602036]
+
+[node name="RotationTimer" type="Timer" parent="." unique_id=1899031143]
+wait_time = 3.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=235330107 groups=["Player"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=510006997]
+shape = SubResource("RectangleShape2D_af25e")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=2050933388]
+wait_time = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=573628744]
+position = Vector2(17, 0)
+rotation = 1.5707964
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_7juqt")
+
+[connection signal="timeout" from="RotationTimer" to="." method="_on_rotation_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

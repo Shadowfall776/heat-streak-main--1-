@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://y7ecnx7ph5c1"]
+
+[ext_resource type="PackedScene" uid="uid://bdw8ajaey4fbu" path="res://UI/UI.tscn" id="1_5haw7"]
+[ext_resource type="PackedScene" uid="uid://b8uwwjaheopus" path="res://Player/Player.tscn" id="1_cbsy4"]
+[ext_resource type="AudioStream" uid="uid://ds281wr1c3who" path="res://Namepending-one-v1.mp3" id="2_e18lo"]
+[ext_resource type="PackedScene" uid="uid://c8gb4vjrbtw41" path="res://Enemies/enemy.tscn" id="3_y7fgq"]
+[ext_resource type="PackedScene" uid="uid://cuy3u5plsjk5n" path="res://UI/Screens/Pause/Pause.tscn" id="4_jgor1"]
+[ext_resource type="PackedScene" uid="uid://dv6it8qmro0jd" path="res://Enemies/spawn_point.tscn" id="5_ul0cs"]
+
+[node name="Node2D" type="Node2D" unique_id=180366170]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1972800559]
+stream = ExtResource("2_e18lo")
+autoplay = true
+bus = &"SFX"
+parameters/looping = true
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1530910179]
+
+[node name="Enemy" parent="Enemies" unique_id=1825160351 instance=ExtResource("3_y7fgq")]
+position = Vector2(137, 453)
+
+[node name="Enemy2" parent="Enemies" unique_id=1784527774 instance=ExtResource("3_y7fgq")]
+position = Vector2(942, 635)
+
+[node name="Enemy3" parent="Enemies" unique_id=1230733697 instance=ExtResource("3_y7fgq")]
+position = Vector2(263, 673)
+
+[node name="Enemy4" parent="Enemies" unique_id=1041891596 instance=ExtResource("3_y7fgq")]
+position = Vector2(1213, 310)
+
+[node name="Enemy5" parent="Enemies" unique_id=1488742181 instance=ExtResource("3_y7fgq")]
+position = Vector2(624, 681)
+
+[node name="Enemy6" parent="Enemies" unique_id=580899055 instance=ExtResource("3_y7fgq")]
+position = Vector2(1080, 181)
+
+[node name="Enemy7" parent="Enemies" unique_id=1101833908 instance=ExtResource("3_y7fgq")]
+position = Vector2(1151, 540)
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=1387289991]
+
+[node name="SpawnPoint" parent="SpawnPoints" unique_id=1048712066 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("5_ul0cs")]
+position = Vector2(-421, 33)
+spawn_parent = NodePath("../../Enemies")
+
+[node name="SpawnPoint2" parent="SpawnPoints" unique_id=268461865 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("5_ul0cs")]
+position = Vector2(-215, 725)
+spawn_parent = NodePath("../../Enemies")
+
+[node name="SpawnPoint3" parent="SpawnPoints" unique_id=981477135 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("5_ul0cs")]
+position = Vector2(832, 879)
+spawn_parent = NodePath("../../Enemies")
+
+[node name="SpawnPoint4" parent="SpawnPoints" unique_id=703862258 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("5_ul0cs")]
+position = Vector2(1381, 437)
+spawn_parent = NodePath("../../Enemies")
+
+[node name="SpawnPoint5" parent="SpawnPoints" unique_id=310748183 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("5_ul0cs")]
+position = Vector2(1387, 40)
+spawn_parent = NodePath("../../Enemies")
+
+[node name="SpawnPoint6" parent="SpawnPoints" unique_id=544447307 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("5_ul0cs")]
+position = Vector2(1123, -175)
+spawn_parent = NodePath("../../Enemies")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=235416842]
+position = Vector2(576, 324)
+zoom = Vector2(0.52, 0.52)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2082724338]
+follow_viewport_enabled = true
+
+[node name="Pause" parent="CanvasLayer" unique_id=358658097 instance=ExtResource("4_jgor1")]
+visible = false
+
+[node name="Timer" type="Timer" parent="." unique_id=284873298]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Player" parent="." unique_id=1601155827 instance=ExtResource("1_cbsy4")]
+visibility_layer = 2
+position = Vector2(444, 106)
+
+[node name="UI" parent="." unique_id=113216334 groups=["UI"] instance=ExtResource("1_5haw7")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
